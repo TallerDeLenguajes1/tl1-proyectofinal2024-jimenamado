@@ -33,6 +33,29 @@ public static class ConsumoApiPregunta
         return null;
     }
 
+       public static async Task<List<Pregunta>> GetPreguntasAPI2(Category categoria,string level, int limit)
+    {
+        try
+        {
+            //https://www.preguntapi.dev/api/categories/javascript?level=facil&limit=5
+           //"http://www.preguntapi.dev/api/categories/javascript"
+            var url = categoria.link+"?level="+level+"&limit="+limit;
+            HttpResponseMessage response = await client.GetAsync(url); //enviar solicitud GET
+            response.EnsureSuccessStatusCode();
+            string responseBody = await response.Content.ReadAsStringAsync(); //leer la respuesta
+            List<Pregunta> preguntas = JsonSerializer.Deserialize<List<Pregunta>>(responseBody);
+
+            return (preguntas);
+        }
+        catch (HttpRequestException ex)
+        {
+            Console.WriteLine("Problemas de acceso a la API");
+            Console.WriteLine("Message :{0}", ex.Message);
+        }
+
+        return null;
+    }
+
     
 
 

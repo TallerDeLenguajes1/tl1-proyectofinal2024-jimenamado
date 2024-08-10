@@ -1,0 +1,15 @@
+C:\Users\user\Documents\PROGRAMADOR\Modulo3\TallerDeLenguajeI\Practica\Proyecto-AmadoJimena\tl1-proyectofinal2024-jimenamado\bin\Debug\net8.0\Proyecto-AmadoJimena.exe
+C:\Users\user\Documents\PROGRAMADOR\Modulo3\TallerDeLenguajeI\Practica\Proyecto-AmadoJimena\tl1-proyectofinal2024-jimenamado\bin\Debug\net8.0\Proyecto-AmadoJimena.deps.json
+C:\Users\user\Documents\PROGRAMADOR\Modulo3\TallerDeLenguajeI\Practica\Proyecto-AmadoJimena\tl1-proyectofinal2024-jimenamado\bin\Debug\net8.0\Proyecto-AmadoJimena.runtimeconfig.json
+C:\Users\user\Documents\PROGRAMADOR\Modulo3\TallerDeLenguajeI\Practica\Proyecto-AmadoJimena\tl1-proyectofinal2024-jimenamado\bin\Debug\net8.0\Proyecto-AmadoJimena.dll
+C:\Users\user\Documents\PROGRAMADOR\Modulo3\TallerDeLenguajeI\Practica\Proyecto-AmadoJimena\tl1-proyectofinal2024-jimenamado\bin\Debug\net8.0\Proyecto-AmadoJimena.pdb
+C:\Users\user\Documents\PROGRAMADOR\Modulo3\TallerDeLenguajeI\Practica\Proyecto-AmadoJimena\tl1-proyectofinal2024-jimenamado\obj\Debug\net8.0\Proyecto-AmadoJimena.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\Documents\PROGRAMADOR\Modulo3\TallerDeLenguajeI\Practica\Proyecto-AmadoJimena\tl1-proyectofinal2024-jimenamado\obj\Debug\net8.0\Proyecto-AmadoJimena.AssemblyInfoInputs.cache
+C:\Users\user\Documents\PROGRAMADOR\Modulo3\TallerDeLenguajeI\Practica\Proyecto-AmadoJimena\tl1-proyectofinal2024-jimenamado\obj\Debug\net8.0\Proyecto-AmadoJimena.AssemblyInfo.cs
+C:\Users\user\Documents\PROGRAMADOR\Modulo3\TallerDeLenguajeI\Practica\Proyecto-AmadoJimena\tl1-proyectofinal2024-jimenamado\obj\Debug\net8.0\Proyecto-AmadoJimena.csproj.CoreCompileInputs.cache
+C:\Users\user\Documents\PROGRAMADOR\Modulo3\TallerDeLenguajeI\Practica\Proyecto-AmadoJimena\tl1-proyectofinal2024-jimenamado\obj\Debug\net8.0\Proyecto-AmadoJimena.sourcelink.json
+C:\Users\user\Documents\PROGRAMADOR\Modulo3\TallerDeLenguajeI\Practica\Proyecto-AmadoJimena\tl1-proyectofinal2024-jimenamado\obj\Debug\net8.0\Proyecto-AmadoJimena.dll
+C:\Users\user\Documents\PROGRAMADOR\Modulo3\TallerDeLenguajeI\Practica\Proyecto-AmadoJimena\tl1-proyectofinal2024-jimenamado\obj\Debug\net8.0\refint\Proyecto-AmadoJimena.dll
+C:\Users\user\Documents\PROGRAMADOR\Modulo3\TallerDeLenguajeI\Practica\Proyecto-AmadoJimena\tl1-proyectofinal2024-jimenamado\obj\Debug\net8.0\Proyecto-AmadoJimena.pdb
+C:\Users\user\Documents\PROGRAMADOR\Modulo3\TallerDeLenguajeI\Practica\Proyecto-AmadoJimena\tl1-proyectofinal2024-jimenamado\obj\Debug\net8.0\Proyecto-AmadoJimena.genruntimeconfig.cache
+C:\Users\user\Documents\PROGRAMADOR\Modulo3\TallerDeLenguajeI\Practica\Proyecto-AmadoJimena\tl1-proyectofinal2024-jimenamado\obj\Debug\net8.0\ref\Proyecto-AmadoJimena.dll
