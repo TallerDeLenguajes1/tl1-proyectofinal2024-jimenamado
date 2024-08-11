@@ -14,9 +14,7 @@ public class Player
     private int vidas;
     private int cantRespuestaCorrecta;
     private int cantRespuestaIncorrecta;
-
     private Nivel nivel;
-
     private int cantidadPreguntasPorNivel;
 
     public Player(string nombre)
@@ -27,7 +25,7 @@ public class Player
         cantRespuestaCorrecta = 0;
         cantRespuestaIncorrecta = 0;
         nivel = Nivel.facil;
-        cantidadPreguntasPorNivel = 5;
+        cantidadPreguntasPorNivel = 1;
     }
     public void DisminuirVidas()
     {
@@ -37,6 +35,10 @@ public class Player
     {
         puntaje = cantRespuestaCorrecta * 5 - cantRespuestaIncorrecta * 3;
     }
+    public int ObtenerPuntaje(){
+        return puntaje;
+    }
+
     public void SumarRespuestaCorrecta()
     {
         cantRespuestaCorrecta++;
@@ -51,11 +53,11 @@ public class Player
     {
         return vidas;
     }
-    public int CantidadPreguntasCorrectas()
+    public int CantidadRespuestasCorrectas()
     {
         return cantRespuestaCorrecta;
     }
-    public int CantidadPreguntasIncorrectas()
+    public int CantidadRespuestasIncorrectas()
     {
         return cantRespuestaIncorrecta;
     }
@@ -72,12 +74,12 @@ public class Player
     public void CambiarNivelMedio(){
 
         nivel = Nivel.normal;
-        cantidadPreguntasPorNivel = 8;
+        cantidadPreguntasPorNivel = 1;
     }
     public void CambiarNivelDificil(){
 
         nivel = Nivel.dificil;
-        cantidadPreguntasPorNivel = 10;
+        cantidadPreguntasPorNivel = 1;
     }
 
     public int ObtenerCantidadPreguntas(){

@@ -1,4 +1,6 @@
-﻿using FabricaDePreguntas;
+﻿using System.Text.Json;
+using System.Text.Json.Nodes;
+using FabricaDePreguntas;
 using Usuario;
 internal class Programs
 {
@@ -12,28 +14,28 @@ internal class Programs
 
         List<string> respuestas = ObtenerListadoDeOpciones();
 
-        while (usuario.CantidadVidas() > 0)
+        int nivel = 1;
+
+        while (usuario.CantidadVidas() > 0 && nivel <= 3)
         {
             List<Pregunta> preguntas = await ObtenerPreguntasPorCategoria(usuario, categoria);
 
-            int i = 1;
+            int nroPregunta = 1;
+
             foreach (var preguntaX in preguntas)
             {
-                MostrarPregunta(i, preguntaX);
+                MostrarPregunta(nroPregunta, preguntaX);
+
                 int index2 = RespuestaUsuario();
 
-                if (preguntaX.correct_answer.ToString() == respuestas[index2])
+                if (preguntaX.correct_answer == respuestas[index2])
                 {
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    System.Console.WriteLine("¡Muy bien, Respuesta Correcta!");
-                    Console.ResetColor();
+                    ImprimirMensajeColor("¡Muy bien, Respuesta Correcta!", ConsoleColor.Green);
                     usuario.SumarRespuestaCorrecta();
                 }
                 else
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    System.Console.WriteLine("¡Ups, Respuesta Incorrecta! :(");
-                    Console.ResetColor();
+                    ImprimirMensajeColor("¡Ups, Respuesta Incorrecta! :(", ConsoleColor.Red);
                     usuario.SumarRespuestaIncorrecta();
                     usuario.DisminuirVidas();
                 }
@@ -43,25 +45,75 @@ internal class Programs
                     break;
                 }
 
-                i++;
+                nroPregunta++;
             }
+
             if (usuario.CantidadVidas() > 0)
             {
-                System.Console.WriteLine("Felicidades, Pasaste al siguiente nivel");
-                if (usuario.ObtenerNivel() == Nivel.facil.ToString())
+                if (nivel < 3)
                 {
-                    usuario.CambiarNivelMedio();
+                    if (usuario.ObtenerNivel() == Nivel.facil.ToString())
+                    {
+                        ImprimirMensajeColor("Felicidades, Pasaste al nivel 2", ConsoleColor.DarkYellow);
+                        usuario.CambiarNivelMedio();
+                    }
+                    else
+                    {
+                        ImprimirMensajeColor("Felicidades, Pasaste al nivel 3", ConsoleColor.DarkYellow);
+                        usuario.CambiarNivelDificil();
+                    }
                 }
-                else
-                {
-                    usuario.CambiarNivelDificil();
-                }
-            }
-            else
-            {
-                Console.WriteLine("Perdiste");
+                nivel++;
             }
         }
+
+        if (usuario.CantidadVidas() > 0)
+        {
+            ImprimirMensajeColor("¡FELICIDADES, GANASTE!", ConsoleColor.DarkGreen);
+            usuario.CalcularPuntaje();
+            GuardarGanadorJson(usuario);
+        }
+        else
+        {
+            ImprimirMensajeColor("¡PERDISTE!", ConsoleColor.DarkRed);
+            usuario.CalcularPuntaje();
+        }
+
+        System.Console.WriteLine("GAME OVER");
+
+        ManejoArchivo helperArchivo = new ManejoArchivo();
+
+        List<Historico> rankingGanadores = helperArchivo.ObtenerListadoGanadores();
+
+        if (rankingGanadores.Count() > 0)
+        {
+            System.Console.WriteLine("---RANKING MEJORES JUGADORES---");
+
+            foreach (var ganador in rankingGanadores)
+            {
+                System.Console.WriteLine("Nombre:" + ganador.Nombre);
+                System.Console.WriteLine("Puntaje:" + ganador.Puntaje);
+                System.Console.WriteLine("Cantidad Respuestas Correctas:" + ganador.CantRespuestaCorrecta);
+                System.Console.WriteLine("Cantidad Respuestas Incorrectas:" + ganador.CantRespuestaIncorrecta);
+                System.Console.WriteLine();
+            }
+        }else
+        {
+            System.Console.WriteLine("No hay Ganadores aun");
+        }
+    }
+
+    private static void GuardarGanadorJson(Player usuario)
+    {
+        ManejoArchivo helperArchivo = new ManejoArchivo();
+        helperArchivo.GuardarGanadorJson(usuario);
+    }
+
+    private static void ImprimirMensajeColor(string mensaje, ConsoleColor color)
+    {
+        Console.ForegroundColor = color;
+        System.Console.WriteLine(mensaje);
+        Console.ResetColor();
     }
 
     private static int RespuestaUsuario()
@@ -74,7 +126,7 @@ internal class Programs
             bool resultado = int.TryParse(cadena, out respuesta);
             if (!resultado || respuesta <= 0 || respuesta > 4)
             {
-                System.Console.WriteLine("opcion no valida, ingrese nuevamente");
+                System.Console.WriteLine("Opcion invalida, ingrese nuevamente");
             }
 
         } while (respuesta <= 0 || respuesta > 4);
@@ -94,12 +146,30 @@ internal class Programs
 
     private static void MostrarPregunta(int i, Pregunta preguntaX)
     {
-        System.Console.WriteLine("Pregunta Nro {0}",i);
+
+        System.Console.WriteLine("Pregunta Nro {0}", i);
         System.Console.WriteLine(preguntaX.question);
-        System.Console.WriteLine("\t1) " + preguntaX.answers.answer_a);
-        System.Console.WriteLine("\t2) " + preguntaX.answers.answer_b);
-        System.Console.WriteLine("\t3) " + preguntaX.answers.answer_c);
-        System.Console.WriteLine("\t4) " + preguntaX.answers.answer_d);
+
+        if (!string.IsNullOrEmpty(preguntaX.answers.answer_a))
+        {
+            System.Console.WriteLine("\t1) " + preguntaX.answers.answer_a);
+        }
+
+        if (!string.IsNullOrEmpty(preguntaX.answers.answer_b))
+        {
+            System.Console.WriteLine("\t2) " + preguntaX.answers.answer_b);
+        }
+
+        if (!string.IsNullOrEmpty(preguntaX.answers.answer_c))
+        {
+            System.Console.WriteLine("\t3) " + preguntaX.answers.answer_c);
+        }
+
+        if (!string.IsNullOrEmpty(preguntaX.answers.answer_d))
+        {
+            System.Console.WriteLine("\t4) " + preguntaX.answers.answer_d);
+        }
+
     }
 
     private static async Task<List<Pregunta>> ObtenerPreguntasPorCategoria(Player usuario, Category categoriaSeleccionada)
@@ -160,4 +230,6 @@ internal class Programs
         return categorias[index];
 
     }
+
+
 }
