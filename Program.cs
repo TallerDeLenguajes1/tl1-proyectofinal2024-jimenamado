@@ -76,18 +76,20 @@ internal class Programs
         else
         {
             ImprimirMensajeColor("¡PERDISTE!", ConsoleColor.DarkRed);
-            usuario.CalcularPuntaje();
         }
 
         System.Console.WriteLine("GAME OVER");
 
-        ManejoArchivo helperArchivo = new ManejoArchivo();
+        List<Historico> rankingGanadores = ObtenerListadoGanadores();
 
-        List<Historico> rankingGanadores = helperArchivo.ObtenerListadoGanadores();
+        MostrarRanking(rankingGanadores);
+    }
 
+    private static void MostrarRanking(List<Historico> rankingGanadores)
+    {
         if (rankingGanadores.Count() > 0)
         {
-            System.Console.WriteLine("---RANKING MEJORES JUGADORES---");
+            ImprimirMensajeColor("---RANKING MEJORES JUGADORES---", ConsoleColor.Magenta);
 
             foreach (var ganador in rankingGanadores)
             {
@@ -97,10 +99,19 @@ internal class Programs
                 System.Console.WriteLine("Cantidad Respuestas Incorrectas:" + ganador.CantRespuestaIncorrecta);
                 System.Console.WriteLine();
             }
-        }else
+        }
+        else
         {
             System.Console.WriteLine("No hay Ganadores aun");
         }
+    }
+
+    private static List<Historico> ObtenerListadoGanadores()
+    {
+        ManejoArchivo helperArchivo = new ManejoArchivo();
+
+        List<Historico> rankingGanadores = helperArchivo.ObtenerListadoGanadores();
+        return rankingGanadores;
     }
 
     private static void GuardarGanadorJson(Player usuario)
@@ -146,7 +157,6 @@ internal class Programs
 
     private static void MostrarPregunta(int i, Pregunta preguntaX)
     {
-
         System.Console.WriteLine("Pregunta Nro {0}", i);
         System.Console.WriteLine(preguntaX.question);
 
@@ -202,7 +212,7 @@ internal class Programs
 
     private static Category CategoriaSeleccionada(List<Category> categorias)
     {
-        Console.WriteLine("Listado de Categorias:");
+        ImprimirMensajeColor("LISTADO DE CATEGORIAS:", ConsoleColor.Magenta);
 
         int num = 1;
         foreach (var categoriaX in categorias)
