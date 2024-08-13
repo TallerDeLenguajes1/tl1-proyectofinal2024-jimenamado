@@ -6,6 +6,10 @@ internal class Programs
 {
     private static async Task Main(string[] args)
     {
+        ImpresionMensaje imprimir = new ImpresionMensaje();
+
+        imprimir.ImprimirTitulo();
+        imprimir.ImprimirLogo();
         
 
         Player usuario = CrearUsuario();
@@ -80,7 +84,9 @@ internal class Programs
             ImprimirMensajeColor("¡PERDISTE!", ConsoleColor.DarkRed);
         }
 
-        System.Console.WriteLine("GAME OVER");
+
+        imprimir.ImprimirFinDelJuego();
+        //System.Console.WriteLine("GAME OVER");
 
         List<Historico> rankingGanadores = ObtenerListadoGanadores();
 
