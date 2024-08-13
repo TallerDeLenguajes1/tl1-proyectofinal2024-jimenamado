@@ -1,0 +1,36 @@
+{
+    "categories": [
+        {
+            "name": "cpp",
+            "count_questions": 29,
+            "link": "http://www.preguntapi.dev/api/categories/cpp"
+        },
+        {
+            "name": "csharp",
+            "count_questions": 35,
+            "link": "http://www.preguntapi.dev/api/categories/csharp"
+        },
+        {
+            "name": "css",
+            "count_questions": 38,
+            "link": "http://www.preguntapi.dev/api/categories/css"
+        },
+        {
+            "name": "html",
+            "count_questions": 35,
+            "link": "http://www.preguntapi.dev/api/categories/html"
+        },
+        {
+            "name": "java",
+            "count_questions": 35,
+            "link": "http://www.preguntapi.dev/api/categories/java"
+        },
+        {
+            "name": "javascript",
+            "count_questions": 40,
+            "link": "http://www.preguntapi.dev/api/categories/javascript"
+        }
+    ],
+    "totalCategories": 6,
+    "totalQuestions": 212
+}

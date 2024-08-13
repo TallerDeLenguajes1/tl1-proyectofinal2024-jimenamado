@@ -6,9 +6,11 @@ internal class Programs
 {
     private static async Task Main(string[] args)
     {
+        
+
         Player usuario = CrearUsuario();
 
-        List<Category> categorias = await ConsumoApiCategoria.GetCategorias();
+        List<Category> categorias = await ObtenerCategorias();
 
         Category categoria = CategoriaSeleccionada(categorias);
 
@@ -83,6 +85,19 @@ internal class Programs
         List<Historico> rankingGanadores = ObtenerListadoGanadores();
 
         MostrarRanking(rankingGanadores);
+    }
+
+    private static async Task<List<Category>> ObtenerCategorias()
+    {
+        if (await ConsumoApiCategoria.GetCategorias() != null)
+        {
+            return await ConsumoApiCategoria.GetCategorias();
+        }
+        else
+        {
+            ConsumoCategoriaJson objeto = new ConsumoCategoriaJson();
+            return objeto.ObtenerListadoCategorias();
+        }
     }
 
     private static void MostrarRanking(List<Historico> rankingGanadores)
@@ -186,7 +201,18 @@ internal class Programs
     {
         string nivel = usuario.ObtenerNivel();
         int limite = usuario.ObtenerCantidadPreguntas();
-        List<Pregunta> preguntas = await ConsumoApiPregunta.GetPreguntasAPI2(categoriaSeleccionada, nivel, limite);
+
+        List<Pregunta> preguntas = new List<Pregunta>();
+        if (await ConsumoApiPregunta.GetPreguntasAPI2(categoriaSeleccionada, nivel, limite) != null )
+        {
+            preguntas = await ConsumoApiPregunta.GetPreguntasAPI2(categoriaSeleccionada, nivel, limite);
+
+        }else
+        {
+            ConsumoPreguntasJson objeto = new ConsumoPreguntasJson(categoriaSeleccionada);
+            preguntas = objeto.ObtenerListadoPreguntas(nivel, limite);
+        }
+
         return preguntas;
     }
 
